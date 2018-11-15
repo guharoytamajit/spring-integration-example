@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:int="http://www.springframework.org/schema/integration"
+	xmlns:jms="http://www.springframework.org/schema/jms" xmlns:int-jms="http://www.springframework.org/schema/integration/jms"
+	xsi:schemaLocation="http://www.springframework.org/schema/jms http://www.springframework.org/schema/jms/spring-jms-4.3.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/integration/jms http://www.springframework.org/schema/integration/jms/spring-integration-jms.xsd
+		http://www.springframework.org/schema/integration http://www.springframework.org/schema/integration/spring-integration-5.0.xsd">
+
+	<int:channel id="inputChannel"></int:channel>
+	<int:channel id="outputChannel"></int:channel>
+
+	<int:chain input-channel="inputChannel" output-channel="outputChannel">
+		<int:service-activator ref="serviceActivator"
+			method="greet"></int:service-activator>
+		 <int:filter ref="serviceActivator" method="filter"></int:filter> 
+		<int:service-activator ref="serviceActivator"
+			method="greet" ></int:service-activator>
+		<!-- <int:service-activator ref="serviceActivator" method="greet"></int:service-activator> -->
+	</int:chain>
+
+
+
+
+
+<!--  <int:poller default="true" fixed-delay="50"/> -->
+	<int-jms:inbound-channel-adapter id="inBoundJMSAdapter"
+		connection-factory="connectionFactory" destination="inQueue"
+		channel="inputChannel">
+		<int:poller fixed-rate="1000" />
+	</int-jms:inbound-channel-adapter>
+
+	<int-jms:outbound-channel-adapter id="outBoundJMSAdapter"
+		channel="outputChannel" connection-factory="connectionFactory"
+		destination="outQueue">
+		<!-- <int:poller fixed-rate="1000" /> -->
+	</int-jms:outbound-channel-adapter>
+
+<bean id="inQueue" class="org.apache.activemq.command.ActiveMQQueue">
+		<constructor-arg value="inQueue"/>
+	</bean>
+	
+	<bean id="outQueue" class="org.apache.activemq.command.ActiveMQQueue">
+		<constructor-arg value="outQueue"/>
+	</bean>
+
+<!-- <jms:inbound-channel-adapter id="jmsInboundChannelAdapter" jms-template="jmsTemplate" channel="inputChannel">
+		<int:poller fixed-rate="500" max-messages-per-poll="1" error-channel="errorChannel" />
+</jms:inbound-channel-adapter> -->
+
+</beans>

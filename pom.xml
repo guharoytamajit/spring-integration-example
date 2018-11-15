@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<groupId>com.tamajit</groupId>
+	<artifactId>spring-integration-example</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	<packaging>jar</packaging>
+
+	<name>spring-integration-example</name>
+	<description>Demo project for Spring Boot</description>
+
+	<parent>
+		<groupId>org.springframework.boot</groupId>
+		<artifactId>spring-boot-starter-parent</artifactId>
+		<version>2.0.4.RELEASE</version>
+		<relativePath /> <!-- lookup parent from repository -->
+	</parent>
+
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+		<java.version>1.8</java.version>
+		<webSphereMQVersion>5.3.07</webSphereMQVersion>
+	</properties>
+
+	<dependencies>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-integration</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-test</artifactId>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.integration</groupId>
+			<artifactId>spring-integration-jms</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.activemq</groupId>
+			<artifactId>activemq-broker</artifactId>
+		</dependency>
+		<!-- <dependency> <groupId>com.ibm</groupId> <artifactId>com.ibm.mq</artifactId> 
+			<version>5.3.07</version> </dependency> -->
+		<!-- <dependency> <groupId>com.ibm</groupId> <artifactId>com.ibm.mqjms</artifactId> 
+			<version>${webSphereMQVersion}</version> </dependency> -->
+
+		<dependency>
+			<artifactId>com.ibm.mqjms</artifactId>
+			<groupId>com.ibm</groupId>
+			<scope>system</scope>
+			<version>${webSphereMQVersion}</version>
+			<systemPath>${basedir}/lib/com.ibm.mqjms.jar</systemPath>
+		</dependency>
+		<dependency>
+			<artifactId>com.ibm.mq.jmqi</artifactId>
+			<groupId>com.ibm</groupId>
+			<scope>system</scope>
+			<version>${webSphereMQVersion}</version>
+			<systemPath>${basedir}/lib/com.ibm.mq.jmqi.jar</systemPath>
+		</dependency>
+		<dependency>
+			<artifactId>com.ibm.dhbcore</artifactId>
+			<groupId>com.ibm</groupId>
+			<scope>system</scope>
+			<version>${webSphereMQVersion}</version>
+			<systemPath>${basedir}/lib/com.ibm.dhbcore.jar</systemPath>
+		</dependency>
+		<dependency>
+			<artifactId>com.ibm.mq</artifactId>
+			<groupId>com.ibm</groupId>
+			<scope>system</scope>
+			<version>${webSphereMQVersion}</version>
+			<systemPath>${basedir}/lib/com.ibm.mq.jar</systemPath>
+		</dependency>
+		<dependency>
+			<artifactId>javax.resource</artifactId>
+			<groupId>com.ibm</groupId>
+			<scope>system</scope>
+			<version>${webSphereMQVersion}</version>
+			<systemPath>${basedir}/lib/javax.resource.jar</systemPath>
+		</dependency>
+		<dependency>
+			<artifactId>javax.transaction</artifactId>
+			<groupId>com.ibm</groupId>
+			<scope>system</scope>
+			<version>${webSphereMQVersion}</version>
+			<systemPath>${basedir}/lib/javax.transaction.jar</systemPath>
+		</dependency>
+		<dependency>
+			<groupId>javax.jms</groupId>
+			<artifactId>javax.jms-api</artifactId>
+			<version>2.0.1</version>
+		</dependency>
+		
+		<dependency>
+			<groupId>org.mockito</groupId>
+			<artifactId>mockito-all</artifactId>
+			<version>1.9.5</version>
+			<scope>test</scope>
+		</dependency>
+		<!-- <dependency> <groupId>com.ibm</groupId> <artifactId>com.ibm.mq.jmqi</artifactId> 
+			<version>${webSphereMQVersion}</version> </dependency> <dependency> <groupId>com.ibm</groupId> 
+			<artifactId>com.ibm.disthub2.dhbcore</artifactId> <version>${webSphereMQVersion}</version> 
+			</dependency> -->
+	</dependencies>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-maven-plugin</artifactId>
+			</plugin>
+		</plugins>
+	</build>
+
+
+</project>
